@@ -38,3 +38,20 @@ function findMinK(arr, k) {
  * 3. 快速排序思想，取第k个数作为基数，O(n),第一趟就可完成
  */
 
+let quickTopK = function (arr, k) {
+  if(k==0)return []
+  if (arr.length < 2) return arr
+  let midValue = arr.splice(0, 1), left = [], right = []
+  arr.forEach((el) => {
+      el > midValue ? left.push(el) : right.push(el)
+  });
+  if (left.length == k) {
+      return left
+  } else if (left.length > k) {
+      return quickTopK(left, k)
+  } else {
+      return left.concat(midValue, quickTopK(right, k - left.length - 1))
+  }
+}
+console.log(quickTopK([6, 0, 1, 4, 9, 7, -3, 1, -4, -8, 4, -7, -3, 3, 2, -3, 9, 5, -4, 0], 8))
+////[ 9, 7, 9, 6, 5, 4, 4, 3 ]
