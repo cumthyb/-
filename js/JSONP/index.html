@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">JSONP获取服务器时间</button>
+    <script>
+      function fetch(api, parmas, cb) {
+        let getURL = (api, parmas, cb) => {
+          let res = api.replace(/(\/)*$/, "") + "?"
+          for (const key in parmas) {
+            if (parmas.hasOwnProperty(key)) {
+              const val = parmas[key]
+              res += `${key}=${val}&`
+            }
+          }
+          res += `timestamp=${Date.now()}&`
+          res += `callback=${cb}`
+          return res
+        }
+        let script = document.createElement("script")
+        script.src = getURL(api, parmas, cb)
+        document.documentElement.appendChild(script)
+        script.onload = function() {
+          document.documentElement.removeChild(script)
+        }
+      }
+
+      function getTime(time) {
+        console.log(time)
+        document.documentElement.appendChild(document.createTextNode(time))
+      }
+
+      btn.onclick = function() {
+        fetch(
+          "http://localhost:8000/getTime/version1/",
+          {
+            name: "name",
+            pwd: "1231"
+          },
+          'getTime'
+        )
+      }
+    </script>
+  </body>
+</html>

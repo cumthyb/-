@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body{
+      height: 100%;
+    }
+    .b {
+      background-color: rgba(0, 0, 0, 0.3);
+      height: 100%;
+      width: 100%;
+      float: left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      display: none;
+    }
+
+    .b div {
+      height: 50%;
+      width: 50%;
+      background-color: yellow;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .a {
+      background-color: red;
+      height: 100%;
+      width: 100%;
+      color: black;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <script language="javascript">
+
+
+    function DisplayDialog(divId) {
+      document.getElementById(divId).style.display = "block";
+    }
+
+    function CloseDialog(divId) {
+      document.getElementById(divId).style.display = "none";
+    }
+  </script>
+
+  <div class="a">
+    <div class="dasd">
+      <span onClick="DisplayDialog('aa')" style="cursor:pointer;">sadasdas</span>
+      <input type="checked" />
+    </div>
+    <div class="b" id="aa">
+      <div>
+        <input type="radio" name="sadas">
+        <span>asdasdas</span>
+        <input type="radio" name="sadas">
+        <span>asdasdas</span>
+        <button onClick="CloseDialog('aa')" style="cursor:pointer;">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

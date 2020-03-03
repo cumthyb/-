@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div1" class="container">
+      <p>
+        vdom
+        <span>span in p</span>
+      </p>
+      <ul style="font-size:20px">
+        <li>a</li>
+      </ul>
+    </div>
+
+    <script>
+      function vnode(ele) {
+        this.tag = ele.tagName
+        this.data = null
+        this.ele = ele
+        this.children = []
+
+        var atts = ele.getAttributeNames()
+        atts.forEach(att => {
+          var val = ele.getAttribute(att)
+          if (att === "class") {
+            att = "className"
+          }
+          ;(this.data || (this.data = {}))[att] = val
+        })
+      }
+      var rootEle = document.getElementById("div1")
+
+      function createVnode(ele) {
+        var node = new vnode(ele)
+
+        if (ele.children.length) {
+          Array.prototype.forEach.call(ele.children, child => {
+            node.children.push(createVnode(child))
+          })
+        } else {
+          node.children.push(ele.innerText)
+        }
+
+        return node
+      }
+
+      var rootVnode = createVnode(rootEle)
+      console.log(rootVnode)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let demoNode = {
+        tagName: "ul",
+        props: { class: "list" },
+        children: [
+          {
+            tagName: "li",
+            children: [
+              "douyin",
+              {
+                tagName: "span",
+                props: { class: "v v_span", style: "color:red" },
+                children: ["价值"]
+              }
+            ]
+          },
+          { tagName: "li", children: ["toutiao"] }
+        ]
+      }
+
+      function createElement(vnode) {
+        const { tagName, props, children } = vnode
+        let ele
+        if (!tagName) {
+          ele = document.createTextNode(vnode)
+        } else {
+          ele = document.createElement(tagName)
+          if (props) {
+            for (const [key, value] of Object.entries(props)) {
+              ele.setAttribute(key, value)
+            }
+          }
+          if (children) {
+            children.forEach(child => {
+              ele.appendChild(createElement(child))
+            })
+          }
+        }
+        return ele
+      }
+      var root = createElement(demoNode)
+      document.documentElement.appendChild(root)
+    </script>
+  </body>
+</html>

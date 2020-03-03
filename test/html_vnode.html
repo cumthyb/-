@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div1">
+      haha
+      <section id="s1">section</section>
+    </div>
+
+    <script>
+      const root = document.getElementById("div1")
+
+      function getAttributes(ele) {
+        const res = {}
+        const names = ele.getAttributeNames()
+        names.forEach(name => {
+          res[name] = ele.getAttribute(name)
+        })
+        return res
+      }
+      function VNode(ele) {
+        this.tagName = ele.tagName
+        this.ele = ele
+        this.data = getAttributes(ele)
+        this.children = []
+      }
+
+      function getTree(ele) {
+        const vnode = new VNode(ele)
+        if (ele.children.length === 0) {
+          vnode.children.push(ele.innerText)
+        } else {
+          vnode.children = [...ele.children].map(child => getTree(child))
+        }
+
+        return vnode
+      }
+
+      const tree = getTree(root)
+      console.log(tree)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      /* 定位 */
+      /* .top-center-bottom > div {
+        position: absolute;
+        left: 0;
+        width: 100%;
+      }
+      .top {
+        top: 0;
+        height: 100px;
+        background-color: red;
+      }
+      .center {
+        background-color: coral;
+        top: 100px;
+        bottom: 200px;
+      }
+      .bottom {
+        bottom: 0;
+        height: 200px;
+        background-color: cadetblue;
+      } */
+
+      /* flex */
+      /* html,
+      body,
+      .top-center-bottom {
+        height: 100%;
+      }
+      .top-center-bottom {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+      }
+      .top {
+        height: 100px;
+        background-color: red;
+      }
+      .center {
+        background-color: coral;
+        flex: 1;
+      }
+      .bottom {
+        height: 200px;
+        background-color: cadetblue;
+      } */
+
+      /* 网格布局 */
+      html,
+      body,
+      .top-center-bottom {
+        height: 100%;
+      }
+      .top-center-bottom {
+        display: grid;
+        grid-template-rows: 100px auto 200px;
+        grid-template-columns: 100%;
+      }
+      .top {
+        background-color: red;
+      }
+      .center {
+        background-color: coral;
+      }
+      .bottom {
+        background-color: cadetblue;
+      }
+    </style>
+    <div class="top-center-bottom">
+      <div class="top"></div>
+      <div class="center"></div>
+      <div class="bottom"></div>
+    </div>
+  </body>
+</html>

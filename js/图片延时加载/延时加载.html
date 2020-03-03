@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      img {
+        border: none;
+      }
+      img[src=""] {
+        display: none;
+      }
+      #imgBox {
+        box-sizing: border-box;
+        width: 940px;
+        height: 440px;
+        background: #cccccc;
+        margin: 900px auto;
+      }
+      #imgBox img {
+        width: 100%;
+        height: 100%;
+      }
+      #other {
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      图片延迟加载(懒加载)
+      1. 结构中用一个盒子包图片，用于在图片不展示时占据位置
+      2. 最开始，src中不设置任何图片地址，真实地址设置在自定义属性data-src中
+      3. 当浏览器窗口完全展示到图片位置时才去真正加载图片，（第一屏的图片一般会延时加载，来等待其他资源优先加载完)
+     -->
+    <div id="other"></div>
+    <div id="imgBox">
+      <img src="" alt="" data-src="./2.PNG" />
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

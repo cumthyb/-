@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 500%;
+        background: -webkit-linear-gradient(
+          top left,
+          lightblue,
+          lightpink,
+          lightyellow
+        );
+      }
+      #link {
+        box-sizing: border-box;
+        position: fixed;
+        right: 30px;
+        bottom: 230px;
+        width: 100px;
+        height: 100px;
+        background: lightcoral;
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        text-align: center;
+        line-height: 100px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="javascript:void(0);" id="link" class="link">回到顶部</a>
+
+    <script>
+      var html = document.documentElement,
+        btn = document.getElementById("link")
+
+      window.onscroll = function() {
+        let scrollHeight = html.scrollTop
+        let winH = html.clientHeight
+        btn.style.display = scrollHeight > 2 * winH ? "block" : "none"
+      }
+
+      link.onclick = function() {
+        function scroll() {
+          if (html.scrollTop >= 0) {
+            html.scrollTop -= 10
+           requestAnimationFrame(scroll)
+          } 
+        }
+        scroll()
+      }
+    </script>
+  </body>
+</html>

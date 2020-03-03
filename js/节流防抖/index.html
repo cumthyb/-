@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">防抖</button>
+    <button id="btn2">防抖2</button>
+    <button id="btn3">节流1</button>
+    <button id="btn4">节流2</button>
+    <script src="./节流防抖.js"></script>
+    <script>
+      function report() {
+        console.log(new Date())
+      }
+      
+      btn.addEventListener("click",  debounce1(report, 3000))
+      btn4.addEventListener("click",  throttle2(report, 3000))
+    </script>
+  </body>
+</html>

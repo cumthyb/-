@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>异步串行-reduce</h1>
+    <script>
+      const urls = [
+        "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1947502783,467236892&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1754182769,2720150315&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1357622917,3461462779&fm=26&gp=0.jpg",
+        "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3572253624,3298329606&fm=26&gp=0.jpg",
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=273181679,892836824&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1650422938,4292378568&fm=26&gp=0.jpg",
+        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2719686088,1132116319&fm=26&gp=0.jpg",
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2482288857,2389414604&fm=26&gp=0.jpg",
+        "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1008950394,3260594378&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2993630100,3977730748&fm=26&gp=0.jpg",
+        "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2530385745,2010154216&fm=26&gp=0.jpg",
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3604963576,3285848665&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2929995135,3963466891&fm=26&gp=0.jpg",
+        "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2546245370,3868049153&fm=26&gp=0.jpg",
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4043127436,3771479782&fm=26&gp=0.jpg",
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1408249957,983158386&fm=26&gp=0.jpg",
+        "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3725501288,1873990186&fm=26&gp=0.jpg"
+      ]
+
+      const loadImg = url => {
+        return new Promise((reslove, reject) => {
+          const img = new Image()
+          img.src = url
+          img.width = 100
+          img.height = 100
+          img.onload = () => {
+            reslove(url)
+            document.body.appendChild(img)
+          }
+          img.onerror = () => {
+            reject(url)
+          }
+        })
+      }
+
+      urls.reduce((queue, url) => {
+        return queue.then(() => loadImg(url))
+      }, Promise.resolve())
+    </script>
+  </body>
+</html>
