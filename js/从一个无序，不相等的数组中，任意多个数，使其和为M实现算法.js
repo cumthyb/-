@@ -1,5 +1,4 @@
 function printNum(n ,m ,num) {
-
   if(n === 0){
       return;
   }

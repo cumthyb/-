@@ -37,4 +37,4 @@ function MoreThanHalfNum(arr) {
   }
 }
 
-console.log(MoreThanHalfNum([1, 2, 3, 2, 2, 2, 5, 4, 2]));
+console.log(MoreThanHalfNum([1, 2, 2, 3, 4]));
