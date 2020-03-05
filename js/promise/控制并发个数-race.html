@@ -45,14 +45,13 @@
         })
       }
 
-      const limitCount = 5
+      const limitCount =2
 
       const loadImgs = (arr, limitCount, iteratorFn) => {
         var i = 0
         var executing = []
         var res = []
-        var taskPromises = []
-        var sequence = function(params) {
+        var loop = function(params) {
           if (i === arr.length) {
             return Promise.resolve()
           }
@@ -67,15 +66,15 @@
             res.push(data)
           })
 
-          let r = Promise.resolve()
+          let sequence = Promise.resolve()
 
           if (executing.length >= limitCount) {
-            r = Promise.race(executing)
+            sequence = Promise.race(executing)
           }
-          return r.then(() => sequence())
+          return sequence.then(() => loop())
         }
 
-        return sequence()
+        return loop()
           .then(() => Promise.all(executing))
           .then(data => {
             console.log(data)
