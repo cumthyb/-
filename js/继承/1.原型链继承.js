@@ -20,3 +20,8 @@ var instance = new SubType();
 
 console.log(instance.getSuperValue()); //true;
 console.log(instance.getSubValue()); //true;
+
+
+/**
+ * 弊端：共享父类上的属性，任何自类都可以修改
+ */

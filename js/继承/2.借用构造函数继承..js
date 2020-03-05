@@ -13,3 +13,8 @@ var instance1 = new SubType();
 
 console.log(instance1 instanceof SuperType) 
 console.log(instance1 instanceof SubType) 
+
+
+/**
+ * 赋值了父类上的属性，但是没有父类上的方法
+ */
