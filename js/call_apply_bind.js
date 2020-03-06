@@ -36,13 +36,35 @@ Function.prototype.apply2 = function (obj, rest) {
 
 // function.bind(thisArg[, arg1[, arg2[, ...]]])
 Function.prototype.bind2 = function (obj, ...rest) {
-  let _this=this
-  return function(...rest2){
-    return _this.call(obj,[...rest,...rest2])
+  let _this = this
+  return function (...rest2) {
+    return _this.call(obj, [...rest, ...rest2])
   }
 }
 
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== "function") {
+      // closest thing possible to the ECMAScript 5 internal IsCallable function
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
 
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+      fToBind = this,
+      fNOP = function () { },
+      fBound = function () {
+        return fToBind.apply(this instanceof fNOP && oThis
+          ? this
+          : oThis || window,
+          aArgs.concat(Array.prototype.slice.call(arguments)));
+      };
+
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}
 
 function add(c, d) {
   return this.a + this.b + c + d;
@@ -50,10 +72,10 @@ function add(c, d) {
 
 const obj = { a: 1, b: 2 };
 console.log(add.call2(obj, 3, 4))
-console.log(add.apply2(obj, [3, 4]))  
+console.log(add.apply2(obj, [3, 4]))
 
 
-function throttle(fn,wait){
-  
+function throttle(fn, wait) {
+
 }
 
