@@ -1,4 +1,5 @@
-var reg = /\B(?=(\d{3})+\b)/g
-var str = '12345678'
+var str = '12345678.0023'
+var reg=/\B(?<!\d?\.\d?)(?=(\d{3})+\b)/g
+
 
 console.log(str.replace(reg, ','))
