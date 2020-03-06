@@ -1,24 +1,36 @@
-var url = `http://www.baidu.com:8181/a/b/c/d?id=123&name=tom&age=12&address=&score=1&score=2/#/jkgjsk/jkjljlhho`
-
-var queryStr = decodeURIComponent(url).split('?')[1]
-
-var reg = /(?<key>[^=?/&#]+)=(?<value>[^=?/&#]+)/g
-
-var res = reg.exec(queryStr)
-
-var queryObj = {}
-while (res) {
-  const { key, value } = res.groups
-  if (key in queryObj) {
-    if (Array.isArray(queryObj[key])) {
-      queryObj[key].push(value)
-    } else {
-      queryObj[key] = [queryObj[key], value]
-    }
-  } else {
-    queryObj[key] = value
-  }
-  res = reg.exec(queryStr)
+let url = 'http://www.domain.com/?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&enabled';
+parseParam(url)
+/* 结果
+{ user: 'anonymous',
+  id: [ 123, 456 ], // 重复出现的 key 要组装成数组，能被转成数字的就转成数字类型
+  city: '北京', // 中文需解码
+  enabled: true, // 未指定值得 key 约定为 true
 }
+*/
 
-console.log(queryObj)
+function parseParam(url) {
+  let _url = decodeURIComponent(url)
+  let queryStr = _url.split('?')
+  if (queryStr.length < 2) {
+    return null
+  }
+  let reg = /(?<key>[^#?&]+)=(?<val>[^#?&]+)?/g
+  let exec = reg.exec(queryStr[1])
+  let res = {}
+  while (exec) {
+    let { key, val } = exec.groups
+    if (val === null) {
+      val = true
+    }
+    if (key in res) {
+      if (!Array.isArray(res[key])) {
+        res[key] = [res[key]]
+      }
+      res[key].push(val)
+    } else {
+      res[key] = val
+    }
+    exec = reg.exec(queryStr[1])
+  }
+  return res
+}
