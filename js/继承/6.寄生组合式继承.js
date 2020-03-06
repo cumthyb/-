@@ -13,13 +13,10 @@ function Subtype(name, age) {
   this.age = age;
 }
 
-function inheritPrototype(subtype, supertype) {
-  var prototype = object(supertype.prototype); //创建对象
-  prototype.constructor = subtype; //增强对象
-  subtype.prototype = prototype; //指定原型
-}
-
-inheritPrototype(Subtype,Supertype)
+// 继承原型上的方法
+Subtype.prototype=Object.create(Supertype.prototype)
+// 保护自身的构造函数
+Subtype.prototype.constructor=Subtype;
 
 Subtype.prototype.sayAge = function () {
   console.log(this.age);
