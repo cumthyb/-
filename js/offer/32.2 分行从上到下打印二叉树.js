@@ -83,6 +83,26 @@ function printTree2(root) {
 
 }
 
+function printTree3(root) {
+  let currentLevel = [root]
+  let nextLevel = []
+  let res = []
+  let tmp = []
+  while (currentLevel.length > 0) {
+    let node = currentLevel.shift()
+    tmp.push(node.val)
+    node.left && nextLevel.push(node.left)
+    node.right && nextLevel.push(node.right)
+    if (currentLevel.length === 0) {
+      currentLevel = [].concat(nextLevel)
+      nextLevel = []
+      res.push(tmp)
+      tmp = []
+    }
+  }
+  return res
+}
+
 var node8 = new TreeNode(8)
 var node6 = new TreeNode(6)
 var node10 = new TreeNode(10)
