@@ -29,13 +29,35 @@ function concat(arr1, arr2) {
   return res
 }
 
+// let res = concat(arr1, arr2)
+
+// console.log(res);
+
+/**
+ * 原地合并
+ */
+function mergeSortedArr(arr1, arr2) {
+  let ldx1 = arr1.length - 1
+  let ldx2 = arr2.length - 1
+  let p = arr1.length + arr2.length - 1
+  while (ldx1 >= 0 && ldx2 >= 0) {
+    if (arr1[ldx1] < arr2[ldx2]) {
+      arr1[p] = arr1[ldx1]
+      ldx1--
+    } else {
+      arr1[p] = arr2[ldx2]
+      ldx2--
+    }
+    p--
+  }
+  while (ldx1 > 0) {
+    arr1[p--] = arr1[ldx1--]
+  }
+  while (ldx2 > 0) {
+    arr1[p--] = arr2[ldx2--]
+  }
+}
+
+mergeSortedArr(arr1, arr2)
+
 console.log(arr1);
-console.log(arr2);
-
-let res = concat(arr1, arr2)
-
-console.log(res);
-
-console.log(arr1.length, arr2.length, res.length);
-
-
